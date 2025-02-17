@@ -1,4 +1,4 @@
-import type { ChatLLMModel, Message } from '../types'
+import type { Message } from '../types'
 
 export function structMessages(messages: Message[]) {
   return messages.map((message) => {

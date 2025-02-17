@@ -1,4 +1,12 @@
-import type { ChatLLMModel, ChatLLMResponse } from './types'
+import type {
+  AudioTranscriptionModel,
+  AudioTranscriptionResponse,
+  ChatLLMModel,
+  ChatLLMResponse,
+  ErrorResponse,
+  ImageGenerationModel,
+  ImageGenerationResponse,
+} from './types'
 
 export class BaseProvider {
   getProviderName(): string {
@@ -15,16 +23,35 @@ export class BaseProvider {
 
   async chat(_key: string, _options: ChatLLMModel): Promise<ChatLLMResponse> {
     return {
-      // text: '',
-      // message: {
-      //   role: Role.Assistant,
-      //   content: '',
-      // },
       choices: [],
       usage: {
         promptTokens: 0,
         completionTokens: 0,
         totalTokens: 0,
+      },
+    }
+  }
+
+  async generateImage(_key: string, _options: ImageGenerationModel): Promise<ImageGenerationResponse> {
+    return {
+      created: Date.now(),
+      data: [],
+    }
+  }
+
+  async transcribeAudio(_key: string, _options: AudioTranscriptionModel): Promise<AudioTranscriptionResponse> {
+    return {
+      text: '',
+    }
+  }
+
+  protected handleError(error: any): ErrorResponse {
+    return {
+      error: {
+        message: error.message || 'Unknown error',
+        type: error.type || 'internal_error',
+        code: error.code || 'unknown',
+        param: error.param,
       },
     }
   }
