@@ -1,0 +1,28 @@
+{
+  "name": "@serverflow/monorepo",
+  "private": true,
+  "license": "MIT",
+  "author": "BijonAI <info@bijonai.com>",
+  "scripts": {
+    "dev": "pnpm run --parallel --filter=./packages/* dev",
+    "build": "pnpm run --parallel --filter=./packages/* build",
+    "lint": "pnpm run --parallel --filter=./packages/* lint",
+    "format": "pnpm run --parallel --filter=./packages/* format",
+    "test": "pnpm run --parallel --filter=./packages/* test"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^3.16.0",
+    "@eslint/js": "^9.20.0",
+    "@types/node": "22.5.0",
+    "bumpp": "^9.11.1",
+    "eslint": "9.18.0",
+    "eslint-config-prettier": "^9.1.0",
+    "lint-staged": "^15.4.3",
+    "rimraf": "^4.4.1",
+    "simple-git-hooks": "^2.11.1",
+    "tsup": "^8.3.6",
+    "typedoc": "^0.26.11",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.23.0"
+  }
+}

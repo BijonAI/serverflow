@@ -1,0 +1,30 @@
+{
+  "name": "@serverflow/anthropic",
+  "type": "module",
+  "version": "0.0.1",
+  "description": "🔗 Anthropic API client",
+  "author": "BijonAI <info@bijonai.com>",
+  "license": "MIT",
+  "exports": {
+    ".": {
+      "dev": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "publish": "npm publish",
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "pub": "pnpm publish",
+    "lint": "eslint ."
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
