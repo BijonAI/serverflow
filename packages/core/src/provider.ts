@@ -7,12 +7,12 @@ import type {
 } from './types'
 
 export class BaseProvider {
-  getProviderName(): string {
+  static getProviderName(): string {
     return 'base'
   }
 
-  getModels(): string[] {
-    return []
+  static validateModel(_model: string): boolean {
+    return false
   }
 
   async validate(_key: string): Promise<{ valid: boolean, message?: string }> {

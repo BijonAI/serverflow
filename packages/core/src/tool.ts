@@ -39,6 +39,7 @@ export class Toolkit {
       return {
         role: Role.Tool,
         content: tool.func(toolCall.arguments),
+        _id: toolCall._id,
       }
     })
   }

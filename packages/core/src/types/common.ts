@@ -4,6 +4,7 @@ export interface ToolCall {
   name: string
   type: 'function'
   arguments: unknown
+  _id: string
 }
 
 export interface Message {
@@ -26,6 +27,7 @@ export interface AssistantMessage extends Message {
 
 export interface ToolMessage extends Message {
   role: Role.Tool
+  _id: string
 }
 
 export interface Tool {

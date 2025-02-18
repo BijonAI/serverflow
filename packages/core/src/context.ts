@@ -40,8 +40,8 @@ export class ChatContext {
   }
 
   async request(model: string): Promise<ChatLLMResponse> {
-    const Provider = this.providers.find(Provider => (new Provider()).getModels().includes(model))
-    const key = this.keys.get((new Provider!().getProviderName() ?? '') ?? '')
+    const Provider = this.providers.find(Provider => Provider.validateModel(model))
+    const key = this.keys.get(Provider?.getProviderName() ?? 'base')
     if (!Provider) {
       throw new Error(`Provider ${model} not found`)
     }
@@ -64,8 +64,8 @@ export class EmbeddingContext {
   }
 
   async request(model: string, input: string): Promise<EmbeddingResponse> {
-    const Provider = this.providers.find(Provider => (new Provider()).getModels().includes(model))
-    const key = this.keys.get((new Provider!().getProviderName() ?? '') ?? '')
+    const Provider = this.providers.find(Provider => Provider.validateModel(model))
+    const key = this.keys.get(Provider?.getProviderName() ?? 'base')
     if (!Provider) {
       throw new Error(`Provider ${model} not found`)
     }
