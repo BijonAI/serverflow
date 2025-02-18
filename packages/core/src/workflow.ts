@@ -1,5 +1,5 @@
 import type { BaseProvider } from './provider'
-import { ChatContext } from './context'
+import { ChatContext, EmbeddingContext } from './context'
 
 export type KeyMap = Map<string, string>
 
@@ -28,14 +28,21 @@ export class BaseWorkflow {
     this.providers = options.providers
   }
 
-  createChatContext(): ChatContext {
+  chat(): ChatContext {
     return new ChatContext({
       keys: this.keys,
       providers: this.providers,
     })
   }
 
-  async run(input: string, count: number): Promise<WorkflowResult> {
+  embedding(): EmbeddingContext {
+    return new EmbeddingContext({
+      keys: this.keys,
+      providers: this.providers,
+    })
+  }
+
+  async run(_input: string, _count: number): Promise<WorkflowResult> {
     return {
       success: true,
       result: '',

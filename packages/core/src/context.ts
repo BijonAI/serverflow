@@ -1,5 +1,5 @@
 import type { BaseProvider } from './provider'
-import type { ChatLLMResponse, Message, Role } from './types'
+import type { ChatLLMResponse, EmbeddingResponse, Message, Role } from './types'
 import type { KeyMap } from './workflow'
 
 export type Memory = Message[]
@@ -52,4 +52,28 @@ export class ChatContext {
     })
     return response
   }
+}
+
+export class EmbeddingContext {
+  keys: KeyMap
+  providers: (typeof BaseProvider)[]
+
+  constructor(options: ContextOptions) {
+    this.keys = options.keys
+    this.providers = options.providers
+  }
+
+  async request(model: string, input: string): Promise<EmbeddingResponse> {
+    const Provider = this.providers.find(Provider => (new Provider()).getModels().includes(model))
+    const key = this.keys.get((new Provider!().getProviderName() ?? '') ?? '')
+    if (!Provider) {
+      throw new Error(`Provider ${model} not found`)
+    }
+    const provider = new Provider()
+    const response = await provider.embedding(key!, {
+      input,
+      model,
+    })
+    return response
+  } 
 }

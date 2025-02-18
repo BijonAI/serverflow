@@ -1,11 +1,9 @@
 import type {
-  AudioTranscriptionModel,
-  AudioTranscriptionResponse,
   ChatLLMModel,
   ChatLLMResponse,
+  EmbeddingModel,
+  EmbeddingResponse,
   ErrorResponse,
-  ImageGenerationModel,
-  ImageGenerationResponse,
 } from './types'
 
 export class BaseProvider {
@@ -23,36 +21,22 @@ export class BaseProvider {
 
   async chat(_key: string, _options: ChatLLMModel): Promise<ChatLLMResponse> {
     return {
-      choices: [],
-      usage: {
-        promptTokens: 0,
-        completionTokens: 0,
-        totalTokens: 0,
-      },
+      output: '',
     }
   }
 
-  async generateImage(_key: string, _options: ImageGenerationModel): Promise<ImageGenerationResponse> {
+  async embedding(_key: string, _options: EmbeddingModel): Promise<EmbeddingResponse> {
     return {
-      created: Date.now(),
       data: [],
-    }
-  }
-
-  async transcribeAudio(_key: string, _options: AudioTranscriptionModel): Promise<AudioTranscriptionResponse> {
-    return {
-      text: '',
     }
   }
 
   protected handleError(error: any): ErrorResponse {
     return {
-      error: {
-        message: error.message || 'Unknown error',
-        type: error.type || 'internal_error',
-        code: error.code || 'unknown',
-        param: error.param,
-      },
+      message: error.message || 'Unknown error',
+      type: error.type || 'internal_error',
+      code: error.code || 'unknown',
+      param: error.param,
     }
   }
 }
